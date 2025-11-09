@@ -1,7 +1,8 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class CharacterController : MonoBehaviour
 {
     public const string IDLE = "Idle";
     public const string WALK = "Walk";
@@ -48,27 +49,25 @@ public class PlayerController : MonoBehaviour
 
     private PlayerInput playerInput;
     private PlayerInput.MainActions input;
-    private CharacterController controller;
+    private UnityEngine.CharacterController controller;
     private Animator animator;
     private Vector3 _PlayerVelocity;
     private bool isGrounded;
     private int attackCount;
     private bool _attacking = false;
 
-    private void OnEnable() =>
-        input.Enable();
-
     private void OnDisable() =>
         input.Disable();
 
-    private void Awake()
+    private void Start()
     {
         //START GAME
-        controller = GetComponent<CharacterController>();
+        controller = GetComponent<UnityEngine.CharacterController>();
         animator = GetComponentInChildren<Animator>();
 
         playerInput = new PlayerInput();
         input = playerInput.Main;
+        input.Enable();
         AssignInputs();
 
         mover.Init(controller);
@@ -105,6 +104,8 @@ public class PlayerController : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        audioSystem = FindObjectOfType<AudioSystem>();
     }
     private void AssignInputs()
     {

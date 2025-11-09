@@ -2,10 +2,10 @@
 
 public class Mover : BaseCustomComponent
 {
-    private CharacterController _controller;
+    private UnityEngine.CharacterController _controller;
     private float _speed;
 
-    public void Init(CharacterController characterController)
+    public void Init(UnityEngine.CharacterController characterController)
     {
         _controller = characterController;
     }

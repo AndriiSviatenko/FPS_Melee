@@ -1,0 +1,13 @@
+﻿# Default ignored files
+/shelf/
+/workspace.xml
+# Rider ignored files
+/modules.xml
+/contentModel.xml
+/projectSettingsUpdater.xml
+/.idea.Core.iml
+# Datasource local storage ignored files
+/../../../../../../../../../../../../../../:\Projects\WORK\ShooterTopDown\Assets\_Project\Scripts\[Infrastructure]\Patterns\StateMachine\Core\.idea\.idea.Core.dir\.idea/dataSources/
+/dataSources.local.xml
+# Editor-based HTTP Client requests
+/httpRequests/

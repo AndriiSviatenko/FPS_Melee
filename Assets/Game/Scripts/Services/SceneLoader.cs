@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class SceneLoader
 {
     private readonly ICoroutineRunner _coroutineRunner;
+    public Action SceneLoadedEvent;
     public SceneLoader(ICoroutineRunner coroutineRunner) => 
         _coroutineRunner = coroutineRunner;
 
@@ -17,6 +18,7 @@ public class SceneLoader
         if (SceneManager.GetActiveScene().name == nextScene)
         {
             onLoaded?.Invoke();
+            SceneLoadedEvent?.Invoke();
             yield break;
         }
 
@@ -29,5 +31,6 @@ public class SceneLoader
         yield return new WaitForSeconds(2f);
 
         onLoaded?.Invoke();
+        SceneLoadedEvent?.Invoke();
     }
 }

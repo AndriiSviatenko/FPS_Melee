@@ -2,11 +2,11 @@
 
 public class Gravity :  BaseCustomComponent
 {
-    private CharacterController _controller;
+    private UnityEngine.CharacterController _controller;
     private float _minVelocityY = -2f;
     private float _gravity;
 
-    public void Init(CharacterController controller)
+    public void Init(UnityEngine.CharacterController controller)
     {
         _controller = controller;
     }
