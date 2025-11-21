@@ -9,6 +9,8 @@ public class BootStrap : MonoBehaviour
     [SerializeField] private GameObject loadingCurtainPrefab;
     [SerializeField] private string sceneName;
 
+    private ServiceLocator _serviceLocator;
+
     private StateMachine _stateMachine;
     private Loading _loading;
     private StartGame _startGame;
@@ -16,8 +18,13 @@ public class BootStrap : MonoBehaviour
     private SceneLoader _sceneLoader;
     private GameObject _loadingCurtain;
 
+
     private void Awake()
     {
+        _serviceLocator = new ();
+        _serviceLocator.RegisterSingle<CharacterFactory>(new CharacterFactory());
+        _serviceLocator.RegisterSingle<EnemyFactory>(new EnemyFactory());
+
         var instance = Instantiate(coroutineRunner, transform);
         _loadingCurtain = Instantiate(loadingCurtainPrefab, transform);
         _sceneLoader = new(instance);

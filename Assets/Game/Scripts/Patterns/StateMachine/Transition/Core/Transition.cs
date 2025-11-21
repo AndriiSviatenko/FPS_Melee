@@ -5,22 +5,27 @@ namespace _Project.Scripts._Infrastructure_.Patterns.StateMachine.Core
         where TFrom : IState
         where TTo : IState
     {
-        private readonly Func<bool> _condition;
-        private readonly Func<IState, IState, bool> _checkStateEquals;
-        public Type To { get; }
+        private Func<bool> _condition;
+        public Type To { get; private set; }
+        public int Priority { get; private set; }
 
-        public Transition(Func<bool> condition)
+        public Transition<TFrom, TTo> SetCondition(Func<bool> condition, int priority = 0)
         {
             _condition = condition;
             To = typeof(TTo);
-        }
-        public Transition(Func<IState, IState, bool> checkStateEquals)
-        {
-            _checkStateEquals = checkStateEquals;
+            Priority = priority;
+            return this;
         }
 
-        public bool CanTransition(IState from) =>
-            from is TFrom && _condition();
+        public bool CanTransition(IState from)
+        {
+            if (from is not TFrom) return false;
+
+            if (_condition != null)
+                return _condition();
+
+            return false;
+        }
     }
 }
 

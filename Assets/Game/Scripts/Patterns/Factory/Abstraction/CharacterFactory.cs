@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
-public class CharacterFactory : GenericFactory<CharacterController>
+public class CharacterFactory : GenericFactory<CharacterControllerFPS>, IService
 {
-    public override CharacterController Create(CharacterController prefab) =>
+    public override CharacterControllerFPS Create(CharacterControllerFPS prefab) =>
         Object.Instantiate(prefab);
 }

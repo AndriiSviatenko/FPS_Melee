@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-public class CharacterController : MonoBehaviour
+public class CharacterControllerFPS : MonoBehaviour, IService
 {
     public const string IDLE = "Idle";
     public const string WALK = "Walk";

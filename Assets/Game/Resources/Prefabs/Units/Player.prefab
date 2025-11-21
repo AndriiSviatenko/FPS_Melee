@@ -1131,6 +1131,7 @@ GameObject:
   - component: {fileID: 5695186203724847142}
   - component: {fileID: 5695186203724847143}
   - component: {fileID: 8476229630725103182}
+  - component: {fileID: 5695186205160899551}
   - component: {fileID: 5695186205160899543}
   - component: {fileID: 5695186205160899544}
   - component: {fileID: 5695186205160899545}
@@ -1139,7 +1140,6 @@ GameObject:
   - component: {fileID: 5695186205160899548}
   - component: {fileID: 5695186205160899549}
   - component: {fileID: 5695186205160899550}
-  - component: {fileID: 5695186205160899551}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1278,6 +1278,43 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &5695186205160899551
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5695186203724847141}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f9f0bf851d2b2c4a9f56d0423835f9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackDistance: 3
+  attackDelay: 0.4
+  attackSpeed: 1
+  attackDamage: 1
+  attackLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  hitEffect: {fileID: 5334228485563152753, guid: 0134bdc80242c974b88f68d7bb298ed9,
+    type: 3}
+  swordSwing: {fileID: 8300000, guid: 7923190c5e80b4d4d9396acc5d0b48cf, type: 3}
+  hitSound: {fileID: 8300000, guid: 11245d3945c564b45a1bafad5ecb70e5, type: 3}
+  moveSpeed: 5
+  gravity: -9.8
+  jumpHeight: 1.2
+  cam: {fileID: 5695186205412557129}
+  sensitivity: 0
+  mover: {fileID: 5695186205160899543}
+  rotate: {fileID: 5695186205160899544}
+  gravityComponent: {fileID: 5695186205160899545}
+  attack: {fileID: 5695186205160899548}
+  raycastor: {fileID: 5695186205160899547}
+  hitRenderer: {fileID: 5695186205160899546}
+  playerAnimator: {fileID: 5695186205160899549}
+  jumper: {fileID: 5695186205160899550}
+  audioSystem: {fileID: 0}
 --- !u!114 &5695186205160899543
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1374,43 +1411,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 190970bf78f727647afe179447da1c34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &5695186205160899551
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5695186203724847141}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f9f0bf851d2b2c4a9f56d0423835f9c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attackDistance: 3
-  attackDelay: 0.4
-  attackSpeed: 1
-  attackDamage: 1
-  attackLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  hitEffect: {fileID: 5334228485563152753, guid: 0134bdc80242c974b88f68d7bb298ed9,
-    type: 3}
-  swordSwing: {fileID: 8300000, guid: 7923190c5e80b4d4d9396acc5d0b48cf, type: 3}
-  hitSound: {fileID: 8300000, guid: 11245d3945c564b45a1bafad5ecb70e5, type: 3}
-  moveSpeed: 5
-  gravity: -9.8
-  jumpHeight: 1.2
-  cam: {fileID: 5695186205412557129}
-  sensitivity: 0
-  mover: {fileID: 5695186205160899543}
-  rotate: {fileID: 5695186205160899544}
-  gravityComponent: {fileID: 5695186205160899545}
-  attack: {fileID: 5695186205160899548}
-  raycastor: {fileID: 5695186205160899547}
-  hitRenderer: {fileID: 5695186205160899546}
-  playerAnimator: {fileID: 5695186205160899549}
-  jumper: {fileID: 5695186205160899550}
-  audioSystem: {fileID: 0}
 --- !u!1 &5695186205412557127
 GameObject:
   m_ObjectHideFlags: 0

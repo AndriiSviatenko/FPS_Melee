@@ -1,18 +1,20 @@
+using _Project.Scripts._Infrastructure_.Patterns.StateMachine.Core;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class CharacterSpawner : MonoBehaviour
 {
-    [SerializeField] private CharacterController character;
+    [SerializeField] private CharacterControllerFPS character;
     private CharacterFactory _characterFactory;
 
     private void Awake()
     {
-        _characterFactory = new();
+        _characterFactory = ServiceLocator.Container.Single<CharacterFactory>();
     }
-    private void Start()
+
+    public CharacterControllerFPS Spawn()
     {
-        _characterFactory.Create(character);
+        return _characterFactory.Create(character);
     }
 }
