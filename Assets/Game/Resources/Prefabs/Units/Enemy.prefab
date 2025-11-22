@@ -14,6 +14,9 @@ GameObject:
   - component: {fileID: 8953863879292068247}
   - component: {fileID: 1579502647}
   - component: {fileID: 1579502648}
+  - component: {fileID: 7428467519572921535}
+  - component: {fileID: 6114606367587898970}
+  - component: {fileID: -1456177432406016071}
   m_Layer: 6
   m_Name: Enemy
   m_TagString: Untagged
@@ -32,7 +35,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 4700279700454244589}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -112,6 +116,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f54d7e5500317ed4f9ee9ffcf8325aa3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  statController: {fileID: 6114606367587898970}
   maxHealth: 10
 --- !u!114 &1579502648
 MonoBehaviour:
@@ -125,3 +130,76 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 655c95e7bbc9ff94e9e5e9b53e87b33e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _target: {fileID: 0}
+  isHasTarget: 0
+--- !u!114 &7428467519572921535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8953863879292068232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7feaa4545cdd47f4abeeaf189d69bf64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  point: {fileID: 4700279700454244589}
+--- !u!114 &6114606367587898970
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8953863879292068232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24b4bb6595ffdeb4ab635b3ba0ee56b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-1456177432406016071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8953863879292068232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec3efa4aefb37484195e6bb3d6c13746, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Health>k__BackingField: {fileID: 1579502647}
+  <HealthBarPointProvider>k__BackingField: {fileID: 7428467519572921535}
+  <Following>k__BackingField: {fileID: 1579502648}
+--- !u!1 &8979047201887603074
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4700279700454244589}
+  m_Layer: 6
+  m_Name: Point_HealthBar
+  m_TagString: Untagged
+  m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4700279700454244589
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8979047201887603074}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.25, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8953863879292068243}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

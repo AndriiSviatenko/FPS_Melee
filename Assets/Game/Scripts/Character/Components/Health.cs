@@ -4,26 +4,34 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-    int currentHealth;
+    [SerializeField] private StatController statController;
     public int maxHealth;
+    private int _currentHealth;
+    private SliderView _slider;
 
-    void Awake()
+    public void SetSlider(SliderView slider)
     {
-        currentHealth = maxHealth;
+        _slider = slider;
+        statController.Init(_slider);
+        statController.StartComponent();
     }
+
+    private void Awake() =>
+        _currentHealth = maxHealth;
 
     public void TakeDamage(int amount)
     {
-        currentHealth -= amount;
+        _currentHealth -= amount;
 
-        if(currentHealth <= 0)
-        { Death(); }
+        statController.SetValue(_currentHealth);
+
+        if (_currentHealth <= 0)
+        { 
+            Death();
+            Destroy(statController.GetSlider().gameObject);
+        }
     }
 
-    void Death()
-    {
-        // Death function
-        // TEMPORARY: Destroy Object
+    private void Death() =>
         Destroy(gameObject);
-    }
 }

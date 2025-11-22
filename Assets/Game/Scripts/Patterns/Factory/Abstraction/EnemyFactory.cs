@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
-public class EnemyFactory : GenericFactory<Following>, IService
+public class EnemyFactory : GenericFactory<EnemyController>, IService
 {
-    public override Following Create(Following prefab) =>
+    public override EnemyController Create(EnemyController prefab) =>
         Object.Instantiate(prefab);
 }

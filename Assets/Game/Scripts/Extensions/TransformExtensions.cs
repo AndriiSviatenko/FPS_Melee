@@ -8,4 +8,13 @@ public static class TransformExtensions
         temp.x = value;
         transform.position = temp;
     }
+
+    public static void SetPos(this Transform transform, Vector3 value)
+    {
+        transform.position = value;
+    }
+    public static void SetRotate(this Transform transform, Quaternion value)
+    {
+        transform.rotation = value;
+    }
 }

@@ -28,12 +28,9 @@ public class CharacterControllerFPS : MonoBehaviour, IService
     public float gravity = -9.8f;
     public float jumpHeight = 1.2f;
 
-
-    [Header("Camera")]
-    [Space(20f)]
-    public Camera cam;
-    public float sensitivity;
-
+    [SerializeField] private Transform pointCam;
+    public Transform PointCam => pointCam;
+    private Camera _cam;
 
     [Header("Components")]
     [Space(20f)]
@@ -45,24 +42,49 @@ public class CharacterControllerFPS : MonoBehaviour, IService
     [SerializeField] private HitRenderer hitRenderer;
     [SerializeField] private PlayerAnimator playerAnimator;
     [SerializeField] private Jumper jumper;
-    [SerializeField] private AudioSystem audioSystem;
+    [SerializeField] private StatController statsController;
+    private AudioSystem _audioSystem;
 
     private PlayerInput playerInput;
     private PlayerInput.MainActions input;
-    private UnityEngine.CharacterController controller;
+    private CharacterController _controller;
     private Animator animator;
     private Vector3 _PlayerVelocity;
     private bool isGrounded;
     private int attackCount;
     private bool _attacking = false;
+    private SliderContainer _slider;
 
     private void OnDisable() =>
         input.Disable();
 
+    public void SetSlider(SliderContainer slider)
+    {
+        _slider = slider;
+        statsController.Init(_slider.View);
+        statsController.StartComponent();
+    }
+    public void SetCamera(Camera camera)
+    {
+        _cam = camera;
+        _cam.transform.SetParent(pointCam);
+        _cam.transform.localPosition = Vector3.zero;
+        rotate.Init(_cam);
+        rotate.SetSensitivity(15);
+        rotate.SetMinAngle(-180);
+        rotate.SetMaxAngle(180);
+
+        rotate.StartComponent();
+    }
+
+    public void SetAudioSystem(AudioSystem audioSystem)
+    {
+        _audioSystem = audioSystem;
+    }
+
     private void Start()
     {
-        //START GAME
-        controller = GetComponent<UnityEngine.CharacterController>();
+        _controller = GetComponent<CharacterController>();
         animator = GetComponentInChildren<Animator>();
 
         playerInput = new PlayerInput();
@@ -70,19 +92,12 @@ public class CharacterControllerFPS : MonoBehaviour, IService
         input.Enable();
         AssignInputs();
 
-        mover.Init(controller);
+        mover.Init(_controller);
         mover.SetSpeed(8);
 
         mover.StartComponent();
 
-        rotate.Init(cam);
-        rotate.SetSensitivity(15);
-        rotate.SetMinAngle(-80);
-        rotate.SetMaxAngle(80);
-
-        rotate.StartComponent();
-
-        gravityComponent.Init(controller);
+        gravityComponent.Init(_controller);
         gravityComponent.SetGravity(gravity);
         gravityComponent.SetMinVelocityY(-2f);
 
@@ -92,7 +107,7 @@ public class CharacterControllerFPS : MonoBehaviour, IService
 
         attack.StartComponent();
 
-        raycastor.Init(cam, attackLayer);
+        raycastor.Init(_cam, attackLayer);
         raycastor.SetDistance(attackDistance);
 
         raycastor.StartComponent();
@@ -104,8 +119,6 @@ public class CharacterControllerFPS : MonoBehaviour, IService
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-
-        audioSystem = FindObjectOfType<AudioSystem>();
     }
     private void AssignInputs()
     {
@@ -115,7 +128,7 @@ public class CharacterControllerFPS : MonoBehaviour, IService
 
     private void Update()
     {
-        isGrounded = controller.isGrounded;
+        isGrounded = _controller.isGrounded;
         playerAnimator.SetAnimations(_attacking, _PlayerVelocity);
     }
 
@@ -148,17 +161,39 @@ public class CharacterControllerFPS : MonoBehaviour, IService
         yield return new WaitForSeconds(attackDelay);
         var health = raycastor.Raycast<Health>(out bool isHit, out Vector3 hitPoint);
         attack.Execute(health);
-        audioSystem.Play(swordSwing);
+        _audioSystem.Play(swordSwing);
 
         if (isHit)
         {
-            audioSystem.Play(hitSound);
+            _audioSystem.Play(hitSound);
             hitRenderer.Render(hitPoint);
         }
 
-        yield return new WaitForSeconds(attackSpeed);
+        float temp = attackSpeed;
+        statsController.SetValue(temp);
+
+        while (temp > 0)
+        {
+            float start = temp;
+            float end = temp - 1;
+            float t = 0f;
+
+            while (t < 1f)
+            {
+                t += Time.deltaTime;
+                float value = Mathf.Lerp(start, end, t);
+                statsController.SetValue(value);
+                yield return null;
+            }
+
+            temp = end;
+            Debug.Log($"Temp is {temp}");
+        }
+
         attack.ResetAttack();
         _attacking = false;
+
+        statsController.SetValue(attackSpeed);
     }
 
     private void ChangeAnim()

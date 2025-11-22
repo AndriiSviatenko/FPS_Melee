@@ -24,6 +24,8 @@ public class BootStrap : MonoBehaviour
         _serviceLocator = new ();
         _serviceLocator.RegisterSingle<CharacterFactory>(new CharacterFactory());
         _serviceLocator.RegisterSingle<EnemyFactory>(new EnemyFactory());
+        _serviceLocator.RegisterSingle<SliderFactory>(new SliderFactory());
+        _serviceLocator.RegisterSingle<SliderHelper>(new SliderHelper());
 
         var instance = Instantiate(coroutineRunner, transform);
         _loadingCurtain = Instantiate(loadingCurtainPrefab, transform);

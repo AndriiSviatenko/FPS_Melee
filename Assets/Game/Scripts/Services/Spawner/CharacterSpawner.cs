@@ -8,13 +8,10 @@ public class CharacterSpawner : MonoBehaviour
     [SerializeField] private CharacterControllerFPS character;
     private CharacterFactory _characterFactory;
 
-    private void Awake()
-    {
-        _characterFactory = ServiceLocator.Container.Single<CharacterFactory>();
-    }
-
     public CharacterControllerFPS Spawn()
     {
-        return _characterFactory.Create(character);
+        _characterFactory = ServiceLocator.Container.Single<CharacterFactory>();
+        var instance = _characterFactory.Create(character);
+        return instance;
     }
 }
